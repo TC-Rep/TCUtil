@@ -37,11 +37,10 @@ def ntm_configurations(gen):
         left = "".join(tmtape.tape[0:index])
         right = "".join(tmtape.tape[index:len(tmtape.tape)])
         sub_conf.append(f"{left}<{e.state}>{right}")
-        final_tape = left+right
       conf.append(sub_conf)
   except RejectionException:
     pass
-  return current_state,final_tape.strip(),conf
+  return conf
   
 
 def mntm_configurations(gen):
@@ -63,4 +62,4 @@ def mntm_configurations(gen):
       conf.append(confline)
   except RejectionException:
     pass
-  return current_state, conf
+  return conf
