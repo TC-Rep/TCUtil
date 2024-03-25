@@ -1,5 +1,5 @@
 from automata.base.exceptions import RejectionException
-from automata.tm.TM import TMTape
+from automata.tm.tm import TMTape
 from automata.tm.dtm import DTM,TMConfiguration
 from automata.tm.mntm import MTMConfiguration
 
