@@ -21,6 +21,29 @@ def dtm_configurations(gen):
     pass
   return current_state,final_tape.strip(),conf
 
+
+def ntm_configurations(gen):
+  conf = []
+  final_tape = ''
+  current_state = ''
+  try:
+    for g in gen:
+      sub_conf = [] 
+      for e in g:
+        current_state = e.state
+        tmtape = e.tape
+        index = tmtape.current_position
+        blank = tmtape.blank_symbol
+        left = "".join(tmtape.tape[0:index])
+        right = "".join(tmtape.tape[index:len(tmtape.tape)])
+        sub_conf.append(f"{left}<{e.state}>{right}")
+        final_tape = left+right
+      conf.append(sub_conf)
+  except RejectionException:
+    pass
+  return current_state,final_tape.strip(),conf
+  
+
 def mntm_configurations(gen):
   conf = []
   final_tape = ''
