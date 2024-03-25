@@ -1,6 +1,6 @@
 from automata.base.exceptions import RejectionException
 from automata.tm.tm import TMTape
-from automata.tm.dtm import DTM,TMConfiguration
+from automata.tm.dtm import TMConfiguration
 from automata.tm.mntm import MTMConfiguration
 
 def dtm_configurations(gen):
