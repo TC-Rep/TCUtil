@@ -2,6 +2,15 @@ from automata.base.exceptions import RejectionException
 from automata.tm.dtm import TMTape
 from automata.tm.dtm import TMConfiguration
 from automata.tm.mntm import MTMConfiguration
+from automata.fa.nfa import NFA
+from automata.fa.dfa import DFA
+
+
+def validate_string(cadeia,fa):
+  import sys
+  if not all(a in fa.input_symbols for a in cadeia):
+    print("Cadeia inválida")
+    sys.exit(0)
 
 def dtm_configurations(gen):
   conf = []
