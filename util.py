@@ -6,11 +6,26 @@ from automata.fa.nfa import NFA
 from automata.fa.dfa import DFA
 
 
+# Valida a cadeia de entrada nas simulações de FAs
 def validate_string(cadeia,fa):
   import sys
   if not all(a in fa.input_symbols for a in cadeia):
     print("Cadeia inválida")
     sys.exit(0)
+
+# Imprime o rastreamento para a execução de um NFA
+def print_rastreamento(gen,fa,cadeia):
+  try:
+    print("Rastreamento de todos os estados alcançados:")
+    i = 0
+    atual = set(next(gen))
+    for g in gen:
+      novo = set(g)
+      print(f"{chr(0x03B4)}({atual},{cadeia[i]}) -> {novo}")
+      i+=1
+      atual = novo
+  except Exception:
+    print("")
 
 def dtm_configurations(gen):
   conf = []
