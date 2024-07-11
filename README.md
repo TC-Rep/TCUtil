@@ -2,7 +2,3 @@
 
 # Teoria da Computação
 Prof $^a$ Patrícia Machado, UASC/UFCG
-
-**Notas de Aula**
-
-* [Introdução](notes/01.Introducao.md)
