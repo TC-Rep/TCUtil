@@ -54,13 +54,16 @@ def convert_to_dfa(dfa_definition):
   initial_state = next(state["label"] for state in dfa_data["states"] if state["isStart"])
   final_states = set(state["label"] for state in dfa_data["states"] if state["isFinal"])
   transitions = {}
-  for transition in dfa_data["transitions"]:
+  input_symbols = set()
+  for transition in automaton_data["transitions"]:
     source = transition["sourceState"]
-    label = transition["label"]
+    labels = transition["label"].split(",")
     dest = transition["destState"]
-    if source not in transitions:
-        transitions[source] = {}
-    transitions[source][label] = dest
+    for label in labels:
+        if source not in transitions:
+            transitions[source] = {}
+        transitions[source][label] = dest
+        input_symbols.add(label)
   dfa = DFA(
     states=states,
     input_symbols=set(transition["label"] for transition in dfa_data["transitions"]),
