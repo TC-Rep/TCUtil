@@ -45,7 +45,31 @@ def dtm_configurations(gen):
     pass
   return current_state,final_tape.strip(),conf
 
-
+# Cria um dfa no formato json exportado por
+# https://www.eecis.udel.edu/~silber/automata/
+def convert_to_dfa(dfa_definition):
+  import json
+  dfa_data = json.loads(dfa_definition)
+  states = set(state["label"] for state in dfa_data["states"])
+  initial_state = next(state["label"] for state in dfa_data["states"] if state["isStart"])
+  final_states = set(state["label"] for state in dfa_data["states"] if state["isFinal"])
+  transitions = {}
+  for transition in dfa_data["transitions"]:
+    source = transition["sourceState"]
+    label = transition["label"]
+    dest = transition["destState"]
+    if source not in transitions:
+        transitions[source] = {}
+    transitions[source][label] = dest
+  dfa = DFA(
+    states=states,
+    input_symbols=set(transition["label"] for transition in dfa_data["transitions"]),
+    transitions=transitions,
+    initial_state=initial_state,
+    final_states=final_states
+  )
+  return dfa
+  
 def ntm_configurations(gen):
   conf = []
   final_tape = ''
