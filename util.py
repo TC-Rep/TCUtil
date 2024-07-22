@@ -5,7 +5,6 @@ from automata.tm.mntm import MTMConfiguration
 from automata.fa.nfa import NFA
 from automata.fa.dfa import DFA
 
-
 # Valida a cadeia de entrada nas simulações de FAs
 def validate_string(cadeia,fa):
   import sys
@@ -72,6 +71,53 @@ def convert_to_dfa(dfa_definition):
     final_states=final_states
   )
   return dfa
+
+# Gerando uma tabela de transição
+# Código de: https://www.eecis.udel.edu/~silber/automata/
+def make_table(target_fa):
+    import pandas as pd
+    initial_state = target_fa.initial_state
+    final_states = target_fa.final_states
+
+    table = {}
+
+    for from_state, to_state, symbol in target_fa.iter_transitions():
+        # Prepare nice string for from_state
+        if isinstance(from_state, frozenset):
+            from_state_str = str(set(from_state))
+        else:
+            from_state_str = str(from_state)
+
+        if from_state in final_states:
+            from_state_str = "*" + from_state_str
+        if from_state == initial_state:
+            from_state_str = "→" + from_state_str
+
+        # Prepare nice string for to_state
+        if isinstance(to_state, frozenset):
+            to_state_str = str(set(to_state))
+        else:
+            to_state_str = str(to_state)
+
+        if to_state in final_states:
+            to_state_str = "*" + to_state_str
+
+        # Prepare nice symbol
+        if symbol == "":
+            symbol = "λ"
+
+        from_state_dict = table.setdefault(from_state_str, dict())
+        from_state_dict.setdefault(symbol, set()).add(to_state_str)
+
+    # Reformat table for singleton sets
+    for symbol_dict in table.values():
+        for symbol in symbol_dict:
+            if len(symbol_dict[symbol]) == 1:
+                symbol_dict[symbol] = symbol_dict[symbol].pop()
+
+
+    df = pd.DataFrame.from_dict(table).fillna("∅").T
+    return df.reindex(sorted(df.columns), axis=1)
   
 def ntm_configurations(gen):
   conf = []
