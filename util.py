@@ -66,7 +66,7 @@ def convert_to_dfa(dfa_definition):
         input_symbols.add(label)
   dfa = DFA(
     states=states,
-    input_symbols=set(transition["label"] for transition in dfa_data["transitions"]),
+    input_symbols=input_symbols,
     transitions=transitions,
     initial_state=initial_state,
     final_states=final_states
