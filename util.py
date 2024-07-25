@@ -12,6 +12,20 @@ def validate_string(cadeia,fa):
     print("Cadeia inválida")
     sys.exit(0)
 
+# Imprime o rastreamento para a execução de um DFA
+def print_rastreamento_dfa(gen,fa,cadeia):
+  try:
+    print("Rastreamento de todos os estados alcançados:")
+    i = 0
+    atual = next(gen)
+    for g in gen:
+      novo = g
+      print(f"{chr(0x03B4)}({atual},{cadeia[i]}) -> {novo}")
+      i+=1
+      atual = novo
+  except RejectionException:
+    print("")
+
 # Imprime o rastreamento para a execução de um NFA
 def print_rastreamento(gen,fa,cadeia):
   try:
@@ -23,7 +37,7 @@ def print_rastreamento(gen,fa,cadeia):
       print(f"{chr(0x03B4)}({atual},{cadeia[i]}) -> {novo}")
       i+=1
       atual = novo
-  except Exception:
+  except RejectionException:
     print("")
 
 def dtm_configurations(gen):
