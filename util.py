@@ -40,6 +40,19 @@ def print_rastreamento(gen,fa,cadeia):
   except RejectionException:
     print("")
 
+# Imprime o rastreamento para a execução de um NPDA
+def print_rastreamento_npda(gen):
+  for g in gen:
+    for c in g:
+      s_list = list(c.stack)
+      s_list.reverse()
+      print(f"({c.state},'{c.remaining_input}',Pilha:[{''.join(s_list)}])", end=" | ")
+    print()
+    if g == set():
+      print(f"Cadeia {cadeia3} não é aceita")
+      sys.exit(0)
+  print(f"Cadeia {cadeia3} é aceita")
+
 def dtm_configurations(gen):
   conf = []
   final_tape = ''
