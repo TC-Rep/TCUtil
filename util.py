@@ -41,7 +41,7 @@ def print_rastreamento(gen,fa,cadeia):
     print("")
 
 # Imprime o rastreamento para a execução de um NPDA
-def print_rastreamento_npda(gen):
+def print_rastreamento_npda(gen,cadeia):
   for g in gen:
     for c in g:
       s_list = list(c.stack)
@@ -49,9 +49,9 @@ def print_rastreamento_npda(gen):
       print(f"({c.state},'{c.remaining_input}',Pilha:[{''.join(s_list)}])", end=" | ")
     print()
     if g == set():
-      print(f"Cadeia {cadeia3} não é aceita")
+      print(f"Cadeia {cadeia} não é aceita")
       sys.exit(0)
-  print(f"Cadeia {cadeia3} é aceita")
+  print(f"Cadeia {cadeia} é aceita")
 
 def dtm_configurations(gen):
   conf = []
