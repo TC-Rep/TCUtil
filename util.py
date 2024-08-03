@@ -42,6 +42,7 @@ def print_rastreamento(gen,fa,cadeia):
 
 # Imprime o rastreamento para a execução de um NPDA
 def print_rastreamento_npda(gen,cadeia):
+  import sys
   for g in gen:
     for c in g:
       s_list = list(c.stack)
