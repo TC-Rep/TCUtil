@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 # Desenha uma DTM. O parâmetro dtm é uma TM determinística no formato de automata-lib
 def draw_TM(dtm,layoutid):
-  blank = chr(0x2591)
+  blank = chr(0x2294)
   SD1 = nx.DiGraph()
   SD1.add_nodes_from(dtm.states)
   for s,s_dict in dtm.transitions.items():
