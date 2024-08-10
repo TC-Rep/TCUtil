@@ -28,7 +28,6 @@ def draw_TM(dtm,layoutid):
                              font_size=8,
                              node_size=1000)
   other = [s for s in dtm.states if not s==dtm.initial_state and not s in dtm.final_states]
-  print(other)
   nx.draw_networkx_nodes(SD1, pos, 
       nodelist = other,
       node_size=1000, node_color='beige')
