@@ -2,7 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 # Desenha uma DTM. O parâmetro dtm é uma TM determinística no formato de automata-lib
-def draw_TM(dtm):
+def draw_TM(dtm,layoutid):
   blank = chr(0x2591)
   SD1 = nx.DiGraph()
   SD1.add_nodes_from(dtm.states)
@@ -15,9 +15,6 @@ def draw_TM(dtm):
         j= blank
       #print(s,i,t,j,m)
       SD1.add_edge(s,t,label=f"{i} {chr(0x2192)} {j}, {m}")
-  layoutid='neato'
-  #pos=nx.nx_pydot.pydot_layout(SD1, layoutid)
-  #pos=nx.nx_pydot.graphviz_layout(SD1, layoutid)
   pos=nx.nx_agraph.pygraphviz_layout(SD1, layoutid)
   nx.draw_networkx_labels(SD1,pos=pos,font_size=8)
   nx.draw_networkx_edges(SD1,pos=pos,edgelist=list(SD1.edges()),
@@ -30,6 +27,16 @@ def draw_TM(dtm):
                              edge_labels=nx.get_edge_attributes(SD1,'label'),
                              font_size=8,
                              node_size=1000)
-  nx.draw_networkx_nodes(SD1, pos, node_size=1000, node_color='beige')
+  other = [s for s in dtm.states if not s==dtm.initial_state and not s in dtm.final_states]
+  print(other)
+  nx.draw_networkx_nodes(SD1, pos, 
+      nodelist = other,
+      node_size=1000, node_color='beige')
+  nx.draw_networkx_nodes(SD1, pos, 
+      nodelist = [dtm.initial_state],
+      node_size=1000, node_color='yellow')
+  nx.draw_networkx_nodes(SD1, pos, 
+      nodelist = dtm.final_states,
+      node_size=1000, node_color='lightgreen')
   plt.axis(False)
   plt.show()
