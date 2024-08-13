@@ -13,7 +13,7 @@ def drawgv_TM(dtm, layoutid, name):
   SD1.attr(rankdir='LR')
   for s in dtm.states:
     if s in dtm.final_states:
-      SD1.node(s, shape='doublecircle', style='filled', fillcolor='lightgreen')
+      SD1.node(s, shape='doublecircle', style='filled', fillcolor='lightblue')
     elif s == dtm.initial_state:
       SD1.node(s, shape='circle', style='filled', fillcolor='beige')
     else:
