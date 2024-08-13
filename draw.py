@@ -5,7 +5,7 @@ import graphviz
 # Desenha uma TM no formato GraphViz
 def drawgv_TM(dtm, layoutid, name):
   #blank = chr(0x2294)
-  blank = '_'
+  blank = chr(0x25A0)
   SD1 = graphviz.Digraph(name=name, 
                        #filename=name+ '.gv', 
                        #format='png', 
