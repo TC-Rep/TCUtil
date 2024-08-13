@@ -15,7 +15,7 @@ def drawgv_TM(dtm, layoutid, name):
     if s in dtm.final_states:
       SD1.node(s, shape='doublecircle', style='filled', fillcolor='lightgreen')
     elif s == dtm.initial_state:
-      SD1.node(s, shape='circle', style='filled', fillcolor='yellow')
+      SD1.node(s, shape='circle', style='filled', fillcolor='beige')
     else:
       SD1.node(s, shape='circle', style='filled', fillcolor='lightgray')
   for s,s_dict in dtm.transitions.items():
