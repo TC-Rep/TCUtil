@@ -8,7 +8,7 @@ def drawgv_TM(dtm, layoutid, name):
   blank = chr(0x25A0)
   SD1 = graphviz.Digraph(name=name, 
                        #filename=name+ '.gv', 
-                       #format='png', 
+                       format='png', 
                        engine=layoutid)
   SD1.attr(rankdir='LR')
   for s in dtm.states:
