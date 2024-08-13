@@ -10,7 +10,7 @@ def drawgv_TM(dtm, layoutid, name):
                        #filename=name+ '.gv', 
                        #format='png', 
                        engine=layoutid)
-  SD1.attr(rankdir='LR')
+  #SD1.attr(rankdir='LR')
   for s in dtm.states:
     if s in dtm.final_states:
       SD1.node(s, shape='doublecircle', style='filled', fillcolor='lightgreen')
