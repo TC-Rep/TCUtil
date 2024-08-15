@@ -64,8 +64,8 @@ def dtm_configurations(gen):
       tmtape = g.tape
       index = tmtape.current_position
       blank = tmtape.blank_symbol
-      left = "".join(tmtape.tape[0:index])
-      right = "".join(tmtape.tape[index:len(tmtape.tape)])
+      left = ("".join(tmtape.tape[0:index])).replace(blank,chr(0x2294))
+      right = "".join(tmtape.tape[index:len(tmtape.tape)]).replace(blank,chr(0x2294))
       conf.append(f"{left}<{g.state}>{right}")
       final_tape = left+right
   except RejectionException:
