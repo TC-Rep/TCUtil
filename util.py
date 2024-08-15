@@ -159,8 +159,8 @@ def ntm_configurations(gen):
         tmtape = e.tape
         index = tmtape.current_position
         blank = tmtape.blank_symbol
-        left = "".join(tmtape.tape[0:index])
-        right = "".join(tmtape.tape[index:len(tmtape.tape)])
+        left = "".join(tmtape.tape[0:index]).replace(blank,chr(0x2294))
+        right = "".join(tmtape.tape[index:len(tmtape.tape)]).replace(blank,chr(0x2294))
         sub_conf.append(f"{left}<{e.state}>{right}")
       conf.append(sub_conf)
   except RejectionException:
@@ -180,8 +180,8 @@ def mntm_configurations(gen):
         for t in e.tapes:
           index = t.current_position
           blank = t.blank_symbol
-          left = "".join(t.tape[0:index])
-          right = "".join(t.tape[index:len(t.tape)])
+          left = "".join(t.tape[0:index]).replace(blank,chr(0x2294))
+          right = "".join(t.tape[index:len(t.tape)]).replace(blank,chr(0x2294))
           confline = confline + (f"  Fita {cont}: {left}<{e.state}>{right}")
           cont += 1
       conf.append(confline)
