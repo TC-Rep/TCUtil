@@ -31,6 +31,35 @@ def drawgv_TM(dtm, layoutid, name):
   img = Image.open(name+'.png')
   display(img)
 
+# Desenha uma MNTM no formato graphviz
+def drawgv_MNTM(dtm, layoutid, name):
+  #blank = chr(0x2294)
+  blank = chr(0x25A0)
+  SD1 = graphviz.Digraph(name=name, 
+                       #filename=name+ '.gv', 
+                       format='png', 
+                       engine=layoutid)
+  SD1.attr(rankdir='LR')
+  for s in dtm.states:
+    if s in dtm.final_states:
+      SD1.node(s, shape='doublecircle', style='filled', fillcolor='lightblue')
+    elif s == dtm.initial_state:
+      SD1.node(s, shape='circle', style='filled', fillcolor='beige')
+    else:
+      SD1.node(s, shape='circle', style='filled', fillcolor='lightgray')
+  for s,s_dict in dtm.transitions.items():
+      for i,t_tuple in s_dict.items():
+        t,m = t_tuple[0]
+        r_str = ','.join(list(i))
+        w_str = ','.join([x for x,y in m])
+        m_str = ','.join([y for x,y in m])
+        label = (f"({r_str}) {chr(0x2192)} ({w_str}), ({m_str})").replace(dtm.blank_symbol,blank)
+        SD1.edge(s,t,label=label)
+  SD1.render(name)
+  img = Image.open(name+'.png')
+  display(img)
+
+
 # Desenha uma DTM. O parâmetro dtm é uma TM determinística no formato de automata-lib
 def draw_TM(dtm,layoutid):
   blank = chr(0x2294)
