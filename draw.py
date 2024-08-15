@@ -30,7 +30,6 @@ def drawgv_TM(dtm, layoutid, name):
   SD1.render(name)
   img = Image.open(name+'.png')
   display(img)
-  return SD1
 
 # Desenha uma DTM. O parâmetro dtm é uma TM determinística no formato de automata-lib
 def draw_TM(dtm,layoutid):
