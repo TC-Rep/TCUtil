@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import graphviz
+from PIL import Image
 
 # Desenha uma TM no formato GraphViz
 def drawgv_TM(dtm, layoutid, name):
@@ -25,10 +26,10 @@ def drawgv_TM(dtm, layoutid, name):
           i = blank
         if j == dtm.blank_symbol:
           j= blank
-        #print(s,i,t,j,m)
-        #SD1.add_edge(s,t,label=f"{i} {chr(0x2192)} {j}, {m}")
         SD1.edge(s,t,label=f"{i} {chr(0x2192)} {j}, {m}")
-  #SD1.view()
+  SD1.render(name)
+  img = Image.open(name+'.png')
+  display(img)
   return SD1
 
 # Desenha uma DTM. O parâmetro dtm é uma TM determinística no formato de automata-lib
