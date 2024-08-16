@@ -35,33 +35,6 @@ def drawgv_TM(dtm, layoutid='dot', name=''):
   img = Image.open(name+'.png')
   display(img)
 
-# @title {vertical-output: true }
-cadeia5 = "101" # @param {type:"string"}
-from automata.tm.ntm import NTM
-from automata.base.exceptions import RejectionException
-ntm5 = NTM(
-    states={'q1', 'q2', 'q3', 'q4'},
-    input_symbols={'0', '1'},
-    tape_symbols={'0', '1', '.'},
-    transitions={
-        'q1' : {'0': {('q1', '0', 'R')}, '1':{('q1','1','R'),('q2','1','R')}},
-        'q2' : {'0': {('q3','0','R')}, '1': {('q2','1','R')}},
-        'q3' : {'1': {('q4','1','R')}, '0': {('q3','0','R')}, '.': {('q4','.','R')}},
-    },
-    initial_state='q1',
-    blank_symbol='.',
-    final_states={'q4'}
-)
-
-if (all(n in ntm5.input_symbols for n in cadeia5)):
-  gen5 = ntm5.read_input_stepwise(cadeia5)
-  conf = ntm_configurations(gen5)
-  print("Configurações: ")
-  for c in conf:
-    print(c)
-else:
-  print("Cadeia inválida")
-
 # Desenha uma NTM no formato graphviz
 def drawgv_NTM(dtm, layoutid='dot', name=''):
   #blank = chr(0x2294)
