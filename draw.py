@@ -35,6 +35,71 @@ def drawgv_TM(dtm, layoutid='dot', name=''):
   img = Image.open(name+'.png')
   display(img)
 
+# @title {vertical-output: true }
+cadeia5 = "101" # @param {type:"string"}
+from automata.tm.ntm import NTM
+from automata.base.exceptions import RejectionException
+ntm5 = NTM(
+    states={'q1', 'q2', 'q3', 'q4'},
+    input_symbols={'0', '1'},
+    tape_symbols={'0', '1', '.'},
+    transitions={
+        'q1' : {'0': {('q1', '0', 'R')}, '1':{('q1','1','R'),('q2','1','R')}},
+        'q2' : {'0': {('q3','0','R')}, '1': {('q2','1','R')}},
+        'q3' : {'1': {('q4','1','R')}, '0': {('q3','0','R')}, '.': {('q4','.','R')}},
+    },
+    initial_state='q1',
+    blank_symbol='.',
+    final_states={'q4'}
+)
+
+if (all(n in ntm5.input_symbols for n in cadeia5)):
+  gen5 = ntm5.read_input_stepwise(cadeia5)
+  conf = ntm_configurations(gen5)
+  print("Configurações: ")
+  for c in conf:
+    print(c)
+else:
+  print("Cadeia inválida")
+
+# Desenha uma NTM no formato graphviz
+def drawgv_NTM(dtm, layoutid='dot', name=''):
+  #blank = chr(0x2294)
+  blank = chr(0x25A0)
+  SD1 = graphviz.Digraph(name=name, 
+                       #filename=name+ '.gv', 
+                       format='png', 
+                       engine=layoutid)
+  SD1.attr(rankdir='LR')
+  for s in dtm.states:
+    if s in dtm.final_states:
+      SD1.node(s, shape='doublecircle', style='filled', fillcolor='lightblue')
+    elif s == dtm.initial_state:
+      SD1.node(s, shape='circle', style='filled', fillcolor='beige')
+    else:
+      SD1.node(s, shape='circle', style='filled', fillcolor='lightgray')
+  for s,s_dict in dtm.transitions.items():
+      print(s,s_dict)
+      for i,t_dict in s_dict.items():
+        print(t_dict)
+        for t_tuple in t_dict.items():
+          t,j,m = t_tuple
+          if i == dtm.blank_symbol:
+            i = blank
+          if j == dtm.blank_symbol:
+            j= blank
+          SD1.edge(s,t,label=f"{i} {chr(0x2192)} {j}, {m}")
+  if name == "":
+    for n,v in globals().items():
+      if v is dtm:
+        name = n
+  SD1.render(name)
+  img = Image.open(name+'.png')
+  display(img)
+
+drawgv_NTM(ntm5,'dot','ntm5') 
+
+
 # Desenha uma MNTM no formato graphviz
 def drawgv_MNTM(dtm, layoutid, name):
   #blank = chr(0x2294)
@@ -52,13 +117,14 @@ def drawgv_MNTM(dtm, layoutid, name):
     else:
       SD1.node(s, shape='circle', style='filled', fillcolor='lightgray')
   for s,s_dict in dtm.transitions.items():
-      for i,t_tuple in s_dict.items():
-        t,m = t_tuple[0]
-        r_str = ','.join(list(i))
-        w_str = ','.join([x for x,y in m])
-        m_str = ','.join([y for x,y in m])
-        label = (f"({r_str}) {chr(0x2192)} ({w_str}), ({m_str})").replace(dtm.blank_symbol,blank)
-        SD1.edge(s,t,label=label)
+      for t_dict in sdict.items():
+        for i,t_tuple in t_dict.items():
+          t,m = t_tuple[0]
+          r_str = ','.join(list(i))
+          w_str = ','.join([x for x,y in m])
+          m_str = ','.join([y for x,y in m])
+          label = (f"({r_str}) {chr(0x2192)} ({w_str}), ({m_str})").replace(dtm.blank_symbol,blank)
+          SD1.edge(s,t,label=label)
   SD1.render(name)
   img = Image.open(name+'.png')
   display(img)
