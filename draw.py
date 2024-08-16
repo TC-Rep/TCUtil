@@ -88,8 +88,8 @@ def drawgv_MNTM(dtm, layoutid, name):
     else:
       SD1.node(s, shape='circle', style='filled', fillcolor='lightgray')
   for s,s_dict in dtm.transitions.items():
-      for t_dict in s_dict.items():
-        for i,t_tuple in t_dict:
+      #for t_dict in s_dict.items():
+        for i,t_tuple in s_dict:
           t,m = t_tuple[0]
           r_str = ','.join(list(i))
           w_str = ','.join([x for x,y in m])
