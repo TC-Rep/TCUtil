@@ -70,8 +70,6 @@ def drawgv_NTM(dtm, layoutid='dot', name=''):
   img = Image.open(name+'.png')
   display(img)
 
-drawgv_NTM(ntm5,'dot','ntm5') 
-
 
 # Desenha uma MNTM no formato graphviz
 def drawgv_MNTM(dtm, layoutid, name):
