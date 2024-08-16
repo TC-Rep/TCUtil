@@ -72,7 +72,7 @@ def drawgv_NTM(dtm, layoutid='dot', name=''):
 
 
 # Desenha uma MNTM no formato graphviz
-def drawgv_MNTM(dtm, layoutid, name):
+def drawgv_MNTM(dtm, layoutid='dot', name=''):
   #blank = chr(0x2294)
   blank = chr(0x25A0)
   SD1 = graphviz.Digraph(name=name, 
