@@ -4,7 +4,7 @@ import graphviz
 from PIL import Image
 
 # Desenha uma TM no formato GraphViz
-def drawgv_TM(dtm, layoutid, name):
+def drawgv_TM(dtm, layoutid='dot', name=''):
   #blank = chr(0x2294)
   blank = chr(0x25A0)
   SD1 = graphviz.Digraph(name=name, 
@@ -27,6 +27,10 @@ def drawgv_TM(dtm, layoutid, name):
         if j == dtm.blank_symbol:
           j= blank
         SD1.edge(s,t,label=f"{i} {chr(0x2192)} {j}, {m}")
+  if name == "":
+    for n,v in globals().items():
+      if v is dtm:
+        name = n
   SD1.render(name)
   img = Image.open(name+'.png')
   display(img)
