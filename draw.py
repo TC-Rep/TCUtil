@@ -55,7 +55,7 @@ def drawgv_NTM(dtm, layoutid='dot', name=''):
       print(s,s_dict)
       for i,t_dict in s_dict.items():
         print(t_dict)
-        for t_tuple in t_dict.items():
+        for t_tuple in t_dict:
           t,j,m = t_tuple
           if i == dtm.blank_symbol:
             i = blank
