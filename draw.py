@@ -52,9 +52,9 @@ def drawgv_NTM(dtm, layoutid='dot', name=''):
     else:
       SD1.node(s, shape='circle', style='filled', fillcolor='lightgray')
   for s,s_dict in dtm.transitions.items():
-      print(s,s_dict)
+      #print(s,s_dict)
       for i,t_dict in s_dict.items():
-        print(t_dict)
+        #print(t_dict)
         for t_tuple in t_dict:
           t,j,m = t_tuple
           if i == dtm.blank_symbol:
