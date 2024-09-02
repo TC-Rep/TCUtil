@@ -60,5 +60,5 @@ D5 = DFA(
         'q2': {'a': 'q2', 'b': 'q2'},
     },
     initial_state='q0',
-    final_states={}
+    final_states={'q2'}
 )
