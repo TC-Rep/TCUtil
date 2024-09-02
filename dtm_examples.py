@@ -117,7 +117,7 @@ M3 = DTM(
 )
 
 M5 = DTM(
-    states={'q0', 'q1', 'q_accept', 'q_reject', 'q_loop'},
+    states={'q0', 'q1', 'q_accept', 'q_loop'},
     input_symbols={'0', '1'},
     tape_symbols={'0', '1', '.'},
     transitions={
