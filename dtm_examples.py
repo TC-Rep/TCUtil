@@ -116,6 +116,42 @@ M3 = DTM(
     final_states={'done'}
 )
 
+M4 = DTM(
+    states={'q1','q2','q3','q4','q5','qaccept','qreject'},
+    input_symbols={'0'},
+    tape_symbols={'0', 'x', '.'},
+    transitions={
+        'q1': {
+            '0': ('q2', '.', 'R'),
+            '.': ('qreject', '.', 'R'),
+            'x': ('qreject','x','R')
+        },
+        'q2': {
+            '0': ('q3', 'x', 'R'),
+            '.': ('qaccept', '.', 'R'),
+            'x': ('q2','x','R')
+        },
+        'q3': {
+            '0': ('q4', '0', 'R'),
+            '.': ('q5', '.', 'L'),
+            'x': ('q3','x','R')
+        },
+        'q4': {
+            '0': ('q3', 'x', 'R'),
+            '.': ('qreject', '.', 'L'),
+            'x': ('q4','x','R')
+        },
+        'q5': {
+            '0': ('q5', '0', 'L'),
+            '.': ('q2', '.', 'R'),
+            'x': ('q5','x','L')
+        },
+    },
+    initial_state='q1',
+    blank_symbol='.',
+    final_states={'qaccept'}
+)
+
 M5 = DTM(
     states={'q0', 'q1', 'q_accept', 'q_loop'},
     input_symbols={'0', '1'},
