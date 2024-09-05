@@ -63,4 +63,25 @@ D5 = DFA(
     final_states=set()
 )
 
+D6 = DFA(
+    states={'q0', 'q1'},
+    input_symbols={'0', '1'},
+    transitions={
+        'q0': {'0': 'q0', '1': 'q1'},
+        'q1': {'0': 'q1', '1': 'q0'}
+    },
+    initial_state='q0',
+    final_states={'q0'}
+)
 
+D7 = DFA(
+    states={'s0', 's1', 's2'},
+    input_symbols={'0', '1'},
+    transitions={
+        's0': {'0': 's0', '1': 's1'},
+        's1': {'0': 's1', '1': 's2'},
+        's2': {'0': 's2', '1': 's0'}
+    },
+    initial_state='s0',
+    final_states={'s0'}
+)
