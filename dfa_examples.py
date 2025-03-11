@@ -85,3 +85,17 @@ D7 = DFA(
     initial_state='s0',
     final_states={'s0'}
 )
+
+# Reconhece a Linguagem Vazia
+D8 = DFA(
+    states={'q1', 'q2', 'q3'},
+    input_symbols={'0', '1'},
+    transitions={
+        'q1': {'0': 'q1', '1': 'q3'},
+        'q2': {'0': 'q3', '1': 'q3'},
+        'q3': {'0': 'q3', '1': 'q3'}
+    },
+    initial_state='q1',
+    final_states={'q2'}
+)
+
