@@ -16,7 +16,7 @@ def drawgv_DFA(fa, layoutid='dot', name='out'):
       if s in fa.final_states:
           SD1.node(s, shape='doublecircle', style='filled', fillcolor='beige')
       else:
-          SD1.node(s, shape='doublecircle', style='filled', fillcolor='beige') 
+          SD1.node(s, shape='circle', style='filled', fillcolor='beige') 
     else:
       SD1.node(s, shape='circle', style='filled', fillcolor="lightblue")
   for s,s_dict in fa.transitions.items():
@@ -43,7 +43,7 @@ def drawgv_NFA(fa, layoutid='dot', name='out'):
       if s in fa.final_states:
           SD1.node(s, shape='doublecircle', style='filled', fillcolor='beige')
       else:
-          SD1.node(s, shape='doublecircle', style='filled', fillcolor='beige') 
+          SD1.node(s, shape='circle', style='filled', fillcolor='beige') 
     else:
       SD1.node(s, shape='circle', style='filled', fillcolor="lightblue")
   for s,s_dict in fa.transitions.items():
