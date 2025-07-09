@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import graphviz
 from PIL import Image
 
-# Desenha um FA no formato Graphviz para uso no VSCode
-def drawgv_FA(fa, layoutid='dot', name='out'):
+# Desenha um DFA no formato Graphviz para uso no VSCode
+def drawgv_DFA(fa, layoutid='dot', name='out'):
   SD1 = graphviz.Digraph(name=name, 
                        format='png', 
                        engine=layoutid)
@@ -20,8 +20,7 @@ def drawgv_FA(fa, layoutid='dot', name='out'):
     else:
       SD1.node(s, shape='circle', style='filled', fillcolor="lightblue")
   for s,s_dict in fa.transitions.items():
-      for i,t_tuple in s_dict.items():
-        t = t_tuple
+      for i,t in s_dict.items():
         SD1.edge(s,t,label=f"{i}")
   if name == "":
     for n,v in globals().items():
@@ -30,6 +29,36 @@ def drawgv_FA(fa, layoutid='dot', name='out'):
   SD1.render(name)
   img = Image.open(name+'.png')
   img.show()
+
+# Desenha um NFA no formato Graphviz para uso no VSCode
+def drawgv_NFA(fa, layoutid='dot', name='out'):
+  SD1 = graphviz.Digraph(name=name, 
+                       format='png', 
+                       engine=layoutid)
+  SD1.attr(rankdir='LR')
+  for s in fa.states:
+    if s in fa.final_states and not s == fa.initial_state:
+      SD1.node(s, shape='doublecircle', style='filled', fillcolor="lightblue")
+    elif s == fa.initial_state:
+      if s in fa.final_states:
+          SD1.node(s, shape='doublecircle', style='filled', fillcolor='beige')
+      else:
+          SD1.node(s, shape='doublecircle', style='filled', fillcolor='beige') 
+    else:
+      SD1.node(s, shape='circle', style='filled', fillcolor="lightblue")
+  for s,s_dict in fa.transitions.items():
+      for i,t_set in s_dict.items():
+        print(i,t_set)
+        for t in t_set:
+            SD1.edge(s,t,label=f"{i}")
+  if name == "":
+    for n,v in globals().items():
+      if v is fa:
+        name = n
+  SD1.render(name)
+  img = Image.open(name+'.png')
+  img.show()
+
 
 # Desenha uma TM no formato GraphViz
 def drawgv_TM(dtm, layoutid='dot', name=''):
