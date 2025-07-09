@@ -48,7 +48,6 @@ def drawgv_NFA(fa, layoutid='dot', name='out'):
       SD1.node(s, shape='circle', style='filled', fillcolor="lightblue")
   for s,s_dict in fa.transitions.items():
       for i,t_set in s_dict.items():
-        print(i,t_set)
         for t in t_set:
             SD1.edge(s,t,label=f"{i}")
   if name == "":
