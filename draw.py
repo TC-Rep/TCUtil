@@ -22,8 +22,8 @@ def drawgv_DFA(fa, layoutid='dot', name='out'):
       SD1.node(str_s, shape='circle', style='filled', fillcolor="lightblue")
   for s,s_dict in fa.transitions.items():
       str_s = str(s)
-      str_t = str(t)
       for i,t in s_dict.items():
+        str_t = str(t)
         SD1.edge(str_s, str_t, label=f"{i}")
   if name == "":
     for n,v in globals().items():
