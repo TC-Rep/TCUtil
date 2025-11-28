@@ -106,7 +106,7 @@ def drawgv_NPDA(npda, layoutid='dot', name='out'):
         name = n
   SD1.render(name)
   img = Image.open(name+'.png')
-  display(img)
+  img.show()
 
 # Desenha uma TM no formato GraphViz
 def drawgv_TM(dtm, layoutid='dot', name=''):
