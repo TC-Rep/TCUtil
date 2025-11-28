@@ -61,6 +61,46 @@ def drawgv_NFA(fa, layoutid='dot', name='out'):
   img = Image.open(name+'.png')
   img.show()
 
+# Desenha um NPDA no formato Graphviz
+def drawgv_NPDA(npda, layoutid='dot', name='out'):
+  SD1 = graphviz.Digraph(name=name, 
+                       format='png', 
+                       engine=layoutid)
+  SD1.attr(rankdir='LR')
+  for s in npda.states:
+    if s in npda.final_states and not s == npda.initial_state:
+      SD1.node(s, shape='doublecircle', style='filled', fillcolor="lightblue")
+    elif s == npda.initial_state:
+      if s in npda.final_states:
+          SD1.node(s, shape='doublecircle', style='filled', fillcolor='beige')
+      else:
+          SD1.node(s, shape='circle', style='filled', fillcolor='beige') 
+    else:
+      SD1.node(s, shape='circle', style='filled', fillcolor="lightblue")
+  for s,s_dict in npda.transitions.items():
+      for i,st_dict in s_dict.items():
+        if i == '':
+          s_i = "ε"
+        else:
+          s_i = f"{i}"
+        for x,t_set in st_dict.items():
+          if x == '':
+            s_x = "ε"
+          else:
+            s_x = f"{x}"
+          for t,y in t_set:
+              if y == '':
+                s_y = "ε"
+              else:
+                s_y = "".join(y)
+              SD1.edge(s,t,label=f"{s_i},{s_x} → {s_y}")
+  if name == "":
+    for n,v in globals().items():
+      if v is npda:
+        name = n
+  SD1.render(name)
+  img = Image.open(name+'.png')
+  display(img)
 
 # Desenha uma TM no formato GraphViz
 def drawgv_TM(dtm, layoutid='dot', name=''):
