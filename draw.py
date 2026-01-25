@@ -138,7 +138,7 @@ def drawgv_TM(dtm, layoutid='dot', name=''):
         name = n
   SD1.render(name)
   img = Image.open(name+'.png')
-  display(img)
+  img.show()
 
 # Desenha uma NTM no formato graphviz
 def drawgv_NTM(dtm, layoutid='dot', name=''):
@@ -173,7 +173,7 @@ def drawgv_NTM(dtm, layoutid='dot', name=''):
         name = n
   SD1.render(name)
   img = Image.open(name+'.png')
-  display(img)
+  img.show()
 
 
 # Desenha uma MNTM no formato graphviz
@@ -203,7 +203,7 @@ def drawgv_MNTM(dtm, layoutid='dot', name=''):
           SD1.edge(s,t,label=label)
   SD1.render(name)
   img = Image.open(name+'.png')
-  display(img)
+  img.show()
 
 
 # Desenha uma DTM. O parâmetro dtm é uma TM determinística no formato de automata-lib
